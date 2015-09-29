@@ -4,7 +4,7 @@
 #
 Name     : pigz
 Version  : 2.3.3
-Release  : 20
+Release  : 21
 URL      : http://zlib.net/pigz/pigz-2.3.3.tar.gz
 Source0  : http://zlib.net/pigz/pigz-2.3.3.tar.gz
 Summary  : pigz is a parallel implementation of gzip which utilizes multiple cores
