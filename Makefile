@@ -1,4 +1,5 @@
 PKG_NAME := pigz
-URL := http://zlib.net/pigz/pigz-2.3.3.tar.gz
+URL := http://zlib.net/pigz/pigz-2.3.4.tar.gz
+ARCHIVES :=
 
 include ../common/Makefile.common
