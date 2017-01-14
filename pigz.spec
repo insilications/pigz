@@ -4,13 +4,15 @@
 #
 Name     : pigz
 Version  : 2.3.4
-Release  : 24
+Release  : 25
 URL      : http://zlib.net/pigz/pigz-2.3.4.tar.gz
 Source0  : http://zlib.net/pigz/pigz-2.3.4.tar.gz
 Summary  : pigz is a parallel implementation of gzip which utilizes multiple cores
 Group    : Development/Tools
 License  : Apache-2.0 Zlib
 Requires: pigz-bin
+BuildRequires : pkgconfig(zlib)
+BuildRequires : zlib-dev
 Patch1: build.patch
 Patch2: rsync.patch
 Patch3: link.patch
@@ -36,13 +38,14 @@ bin components for the pigz package.
 
 %build
 export LANG=C
+export SOURCE_DATE_EPOCH=1484430669
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -flto -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -flto -fno-semantic-interposition "
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto -fno-semantic-interposition "
 make V=1  %{?_smp_mflags}
 
 %check
@@ -53,6 +56,7 @@ export no_proxy=localhost
 make tests CFLAGS="$RPM_OPT_FLAGS"
 
 %install
+export SOURCE_DATE_EPOCH=1484430669
 rm -rf %{buildroot}
 %make_install
 
