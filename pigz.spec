@@ -4,16 +4,15 @@
 #
 Name     : pigz
 Version  : 2.3.4
-Release  : 25
+Release  : 27
 URL      : http://zlib.net/pigz/pigz-2.3.4.tar.gz
 Source0  : http://zlib.net/pigz/pigz-2.3.4.tar.gz
 Summary  : pigz is a parallel implementation of gzip which utilizes multiple cores
 Group    : Development/Tools
 License  : Apache-2.0 Zlib
 Requires: pigz-bin
-BuildRequires : pkgconfig(zlib)
-BuildRequires : zlib-dev
-Patch1: build.patch
+Requires: pigz-doc
+Patch1: 0001-Add-make-install-for-pigz.patch
 Patch2: rsync.patch
 Patch3: link.patch
 Patch4: error.patch
@@ -29,6 +28,14 @@ Group: Binaries
 bin components for the pigz package.
 
 
+%package doc
+Summary: doc components for the pigz package.
+Group: Documentation
+
+%description doc
+doc components for the pigz package.
+
+
 %prep
 %setup -q -n pigz-2.3.4
 %patch1 -p1
@@ -38,7 +45,7 @@ bin components for the pigz package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1484430669
+export SOURCE_DATE_EPOCH=1484676078
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -56,7 +63,7 @@ export no_proxy=localhost
 make tests CFLAGS="$RPM_OPT_FLAGS"
 
 %install
-export SOURCE_DATE_EPOCH=1484430669
+export SOURCE_DATE_EPOCH=1484676078
 rm -rf %{buildroot}
 %make_install
 
@@ -67,3 +74,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 /usr/bin/gzip
 /usr/bin/pigz
+
+%files doc
+%defattr(-,root,root,-)
+%doc /usr/share/man/man1/*

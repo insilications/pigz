@@ -1,4 +1,4 @@
-build.patch
+0001-Add-make-install-for-pigz.patch
 rsync.patch
 link.patch
 error.patch
