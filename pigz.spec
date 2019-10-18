@@ -4,14 +4,15 @@
 #
 Name     : pigz
 Version  : 2.4
-Release  : 36
+Release  : 37
 URL      : http://zlib.net/pigz/pigz-2.4.tar.gz
 Source0  : http://zlib.net/pigz/pigz-2.4.tar.gz
 Summary  : pigz is a parallel implementation of gzip which utilizes multiple cores
 Group    : Development/Tools
 License  : Apache-2.0 Zlib
-Requires: pigz-bin
-Requires: pigz-doc
+Requires: pigz-bin = %{version}-%{release}
+Requires: pigz-license = %{version}-%{release}
+Requires: pigz-man = %{version}-%{release}
 BuildRequires : pkgconfig(zlib)
 BuildRequires : zlib-dev
 Patch1: 0001-Add-make-install-for-pigz.patch
@@ -25,17 +26,26 @@ pigz, which stands for parallel implementation of gzip, is a fully functional re
 %package bin
 Summary: bin components for the pigz package.
 Group: Binaries
+Requires: pigz-license = %{version}-%{release}
 
 %description bin
 bin components for the pigz package.
 
 
-%package doc
-Summary: doc components for the pigz package.
-Group: Documentation
+%package license
+Summary: license components for the pigz package.
+Group: Default
 
-%description doc
-doc components for the pigz package.
+%description license
+license components for the pigz package.
+
+
+%package man
+Summary: man components for the pigz package.
+Group: Default
+
+%description man
+man components for the pigz package.
 
 
 %prep
@@ -49,8 +59,9 @@ doc components for the pigz package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1514392544
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1571365620
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -58,18 +69,30 @@ export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-m
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export CFLAGS_GENERATE="$CFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
+export FCFLAGS_GENERATE="$FCFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
+export FFLAGS_GENERATE="$FFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
+export CXXFLAGS_GENERATE="$CXXFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
+export LDFLAGS_GENERATE="$LDFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
+export CFLAGS_USE="$CFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
+export FCFLAGS_USE="$FCFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
+export FFLAGS_USE="$FFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
+export CXXFLAGS_USE="$CXXFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
+export LDFLAGS_USE="$LDFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
+CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GENERATE}" FCFLAGS="${FCFLAGS_GENERATE}" LDFLAGS="${LDFLAGS_GENERATE}"
 make  %{?_smp_mflags}
 
-%check
-export LANG=C
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-make tests CFLAGS="$RPM_OPT_FLAGS"
+make tests %{?_smp_mflags} CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GENERATE}" FCFLAGS="${FCFLAGS_GENERATE}" LDFLAGS="${LDFLAGS_GENERATE}"
+make clean
+CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS="${FCFLAGS_USE}" LDFLAGS="${LDFLAGS_USE}"
+make  %{?_smp_mflags}
+
 
 %install
-export SOURCE_DATE_EPOCH=1514392544
+export SOURCE_DATE_EPOCH=1571365620
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pigz
+cp %{_builddir}/pigz-2.4/zopfli/COPYING %{buildroot}/usr/share/package-licenses/pigz/6d182cfd7e2a6c633140f7cdb0c4a46fc4a23589
 %make_install
 
 %files
@@ -80,6 +103,10 @@ rm -rf %{buildroot}
 /usr/bin/gzip
 /usr/bin/pigz
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man1/*
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pigz/6d182cfd7e2a6c633140f7cdb0c4a46fc4a23589
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/pigz.1
