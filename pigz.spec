@@ -4,7 +4,7 @@
 #
 Name     : pigz
 Version  : 2.4
-Release  : 38
+Release  : 39
 URL      : http://zlib.net/pigz/pigz-2.4.tar.gz
 Source0  : http://zlib.net/pigz/pigz-2.4.tar.gz
 Summary  : pigz is a parallel implementation of gzip which utilizes multiple cores
@@ -50,6 +50,7 @@ man components for the pigz package.
 
 %prep
 %setup -q -n pigz-2.4
+cd %{_builddir}/pigz-2.4
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -60,14 +61,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571365620
+export SOURCE_DATE_EPOCH=1604904198
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FFLAGS="$FFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export CFLAGS_GENERATE="$CFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FCFLAGS_GENERATE="$FCFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
@@ -89,7 +90,7 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1571365620
+export SOURCE_DATE_EPOCH=1604904198
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pigz
 cp %{_builddir}/pigz-2.4/zopfli/COPYING %{buildroot}/usr/share/package-licenses/pigz/6d182cfd7e2a6c633140f7cdb0c4a46fc4a23589
