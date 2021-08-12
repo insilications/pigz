@@ -1,0 +1,29 @@
+From 19400ee237d9493e276883580ac83c447e3b9f57 Mon Sep 17 00:00:00 2001
+From: Francisco Boni <boboniboni@gmail.com>
+Date: Thu, 12 Aug 2021 07:00:27 -0300
+Subject: [PATCH 5/5] Add make install
+
+---
+ Makefile | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index c05b465..5fb8bec 100644
+--- a/Makefile
++++ b/Makefile
+@@ -107,5 +107,12 @@ pigz.pdf: pigz.1
+ 
+ all: pigz pigzj pigzt pigzn docs
+ 
++install: pigz
++	mkdir -p $(DESTDIR)/usr/bin
++	cp pigz $(DESTDIR)/usr/bin/pigz
++	ln -s pigz $(DESTDIR)/usr/bin/gzip
++	mkdir -p $(DESTDIR)/usr/share/man/man1/
++	cp pigz.1 $(DESTDIR)/usr/share/man/man1/pigz.1
++
+ clean:
+ 	@rm -f *.o pigz unpigz pigzj pigzn pigzt pigz.c.gz pigz.c.zz pigz.c.zip
+-- 
+2.32.0
+

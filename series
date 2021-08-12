@@ -1,4 +1,5 @@
-0001-Add-make-install-for-pigz.patch
-rsync.patch
-link.patch
-error.patch
+0001-rsync.patch
+0002-Fix-CFLAGS.patch
+0003-Link-static-zlib.patch
+0004-Fix-error.patch
+0005-Add-make-install.patch

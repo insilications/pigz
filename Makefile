@@ -1,5 +1,6 @@
 PKG_NAME := pigz
-URL = http://zlib.net/pigz/pigz-2.4.tar.gz
+URL = https://github.com/madler/pigz.git
 ARCHIVES = 
+ARCHIVES_GIT = 
 
 include ../common/Makefile.common

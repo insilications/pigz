@@ -1,0 +1,25 @@
+From 08e07295d012d75b7607b7e0e358ec00e637e8db Mon Sep 17 00:00:00 2001
+From: Francisco Boni <boboniboni@gmail.com>
+Date: Thu, 12 Aug 2021 06:42:26 -0300
+Subject: [PATCH 3/5] Link static zlib
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index d0c9396..c05b465 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,7 +5,7 @@ LDFLAGS=
+ # LDFLAGS=-g -fsanitize=thread
+ # CFLAGS=-O3 -Wall -Wextra -Wno-unknown-pragmas -Wcast-qual -g -fsanitize=address
+ # LDFLAGS=-g -fsanitize=address
+-LIBS=-lm -lpthread -lz
++LIBS=-lm -lpthread /usr/lib64/libz.a
+ ZOPFLI=zopfli/src/zopfli/
+ ZOP=deflate.o blocksplitter.o tree.o lz77.o cache.o hash.o util.o squeeze.o katajainen.o symbols.o
+ 
+-- 
+2.32.0
+

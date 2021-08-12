@@ -1,0 +1,26 @@
+From 3453123f892e6f795ad28739f4d9c672e077e466 Mon Sep 17 00:00:00 2001
+From: Francisco Boni <boboniboni@gmail.com>
+Date: Thu, 12 Aug 2021 06:43:15 -0300
+Subject: [PATCH 4/5] Fix error
+
+---
+ pigz.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/pigz.c b/pigz.c
+index 76e1ef2..dfb2bb6 100644
+--- a/pigz.c
++++ b/pigz.c
+@@ -4011,6 +4011,9 @@ local void process(char *path) {
+     if (g.decode) {
+         in_init();
+         method = get_header(1);
++        if (method == -1) {
++            throw(1, "EOF on input", g.inf);
++        }
+         if (method != 8 && method != 257 &&
+                 // gzip -cdf acts like cat on uncompressed input
+                 !((method == -1 || method == -2) && g.force && g.pipeout &&
+-- 
+2.32.0
+
