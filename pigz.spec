@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pigz
 Version  : 2.6
-Release  : 201
+Release  : 202
 URL      : file:///aot/build/clearlinux/packages/pigz/pigz-v2.6.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pigz/pigz-v2.6.tar.gz
 Summary  : pigz is a parallel implementation of gzip which utilizes multiple cores
@@ -14,6 +14,7 @@ License  : Zlib
 Requires: pigz-bin = %{version}-%{release}
 Requires: pigz-man = %{version}-%{release}
 BuildRequires : gzip
+BuildRequires : ncompress
 BuildRequires : zlib-dev
 BuildRequires : zlib-staticdev
 # Suppress stripping binaries
@@ -59,7 +60,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1628762518
+export SOURCE_DATE_EPOCH=1628764299
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -166,7 +167,7 @@ fi
 
 
 %install
-export SOURCE_DATE_EPOCH=1628762518
+export SOURCE_DATE_EPOCH=1628764299
 rm -rf %{buildroot}
 %make_install
 
