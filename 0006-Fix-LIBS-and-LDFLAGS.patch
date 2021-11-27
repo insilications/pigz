@@ -1,4 +1,4 @@
-From d963fcc0b4ff980a1febc03062fd4e7ad33608b4 Mon Sep 17 00:00:00 2001
+From 6a3671e76c7117a79f2758aaf759f3e74e28d3b5 Mon Sep 17 00:00:00 2001
 From: Francisco Boni <boboniboni@gmail.com>
 Date: Sat, 27 Nov 2021 17:54:20 -0300
 Subject: [PATCH 6/6] Fix LIBS and LDFLAGS

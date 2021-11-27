@@ -1,4 +1,4 @@
-From 19400ee237d9493e276883580ac83c447e3b9f57 Mon Sep 17 00:00:00 2001
+From c1f7d7013dc4ab23e32720df964d117add58e559 Mon Sep 17 00:00:00 2001
 From: Francisco Boni <boboniboni@gmail.com>
 Date: Thu, 12 Aug 2021 07:00:27 -0300
 Subject: [PATCH 5/6] Add make install

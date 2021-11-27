@@ -4,4 +4,5 @@ export FFLAGS="${FFLAGS_GENERATE}"
 export FCFLAGS="${FCFLAGS_GENERATE}"
 export LDFLAGS="${LDFLAGS_GENERATE}"
 export LIBS="${LIBS_GENERATE}"
-make -j1 test V=1 VERBOSE=1 || :
+make -j1 tests V=1 VERBOSE=1
+tar --create --file=- "/usr/lib64/haswell"/ | pigz -9 -p 16 > teste.tar.gz

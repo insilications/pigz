@@ -1,4 +1,4 @@
-From c9cc927d1f7609fddca6d19962c8d99b234d16e2 Mon Sep 17 00:00:00 2001
+From 8d4f58ffc8faa3636f775ef1b1f66c5331f9ee9d Mon Sep 17 00:00:00 2001
 From: Francisco Boni <boboniboni@gmail.com>
 Date: Thu, 12 Aug 2021 06:39:16 -0300
 Subject: [PATCH 1/6] rsync
@@ -8,10 +8,10 @@ Subject: [PATCH 1/6] rsync
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/pigz.c b/pigz.c
-index f90157f..76e1ef2 100644
+index 4c1bd1b..75a318d 100644
 --- a/pigz.c
 +++ b/pigz.c
-@@ -4306,10 +4306,10 @@ local void defaults(void) {
+@@ -4324,10 +4324,10 @@ local void defaults(void) {
      g.procs = nprocs(8);
      g.shift = x2nmodp(g.block, 3);
  #endif

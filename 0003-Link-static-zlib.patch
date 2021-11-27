@@ -1,4 +1,4 @@
-From 08e07295d012d75b7607b7e0e358ec00e637e8db Mon Sep 17 00:00:00 2001
+From bc53ad7598abe5f5593ba34fda2ecafd356aebbd Mon Sep 17 00:00:00 2001
 From: Francisco Boni <boboniboni@gmail.com>
 Date: Thu, 12 Aug 2021 06:42:26 -0300
 Subject: [PATCH 3/6] Link static zlib
