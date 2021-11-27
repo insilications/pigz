@@ -5,12 +5,14 @@
 %define keepstatic 1
 Name     : pigz
 Version  : 2.6
-Release  : 416
+Release  : 601
 URL      : file:///aot/build/clearlinux/packages/pigz/pigz-v2.6.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pigz/pigz-v2.6.tar.gz
 Summary  : pigz is a parallel implementation of gzip which utilizes multiple cores
 Group    : Development/Tools
 License  : Zlib
+Requires: pigz-bin = %{version}-%{release}
+Requires: pigz-man = %{version}-%{release}
 BuildRequires : acl-dev
 BuildRequires : acl-staticdev
 BuildRequires : bzip2-dev
@@ -46,6 +48,22 @@ Patch6: 0006-Fix-LIBS-and-LDFLAGS.patch
 %description
 pigz, which stands for parallel implementation of gzip, is a fully functional replacement for gzip that exploits multiple processors and multiple cores to the hilt when compressing data. pigz was written by Mark Adler, and uses the zlib and pthread libraries.
 
+%package bin
+Summary: bin components for the pigz package.
+Group: Binaries
+
+%description bin
+bin components for the pigz package.
+
+
+%package man
+Summary: man components for the pigz package.
+Group: Default
+
+%description man
+man components for the pigz package.
+
+
 %prep
 %setup -q -n pigz
 cd %{_builddir}/pigz
@@ -62,7 +80,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1638052506
+export SOURCE_DATE_EPOCH=1638052592
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -166,7 +184,6 @@ export LDFLAGS="${LDFLAGS_GENERATE}"
 export LIBS="${LIBS_GENERATE}"
 tar --create --file=- "/usr/lib64/haswell"/ | ./pigz -9 -p 16 > teste.tar.gz
 ./pigz -dc -p 16 teste.tar.gz | tar -xof -
-exit 1
 make -j1 test V=1 VERBOSE=1
 export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
@@ -187,9 +204,18 @@ fi
 
 
 %install
-export SOURCE_DATE_EPOCH=1638052506
+export SOURCE_DATE_EPOCH=1638052592
 rm -rf %{buildroot}
 %make_install
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/gzip
+/usr/bin/pigz
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/pigz.1
