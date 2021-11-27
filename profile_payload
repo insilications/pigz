@@ -6,3 +6,4 @@ export LDFLAGS="${LDFLAGS_GENERATE}"
 export LIBS="${LIBS_GENERATE}"
 make -j1 tests V=1 VERBOSE=1
 tar --create --file=- "/usr/lib64/haswell"/ | pigz -9 -p 16 > teste.tar.gz
+pigz -dc -p 16 teste.tar.gz | tar -xof -
