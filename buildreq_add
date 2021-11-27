@@ -1,6 +1,23 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
+acl-dev
+acl-staticdev
+bzip2-dev
+bzip2-staticdev
+expat-dev
+expat-staticdev
+gzip
+libxml2-dev
+libxml2-staticdev
+lz4-dev
+lz4-staticdev
+lzo-dev
+lzo-staticdev
+ncompress
+openssl-dev
+xz-dev
+xz-staticdev
 zlib-dev
 zlib-staticdev
-gzip
-ncompress
+zstd-dev
+zstd-staticdev
