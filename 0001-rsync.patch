@@ -1,7 +1,7 @@
 From c9cc927d1f7609fddca6d19962c8d99b234d16e2 Mon Sep 17 00:00:00 2001
 From: Francisco Boni <boboniboni@gmail.com>
 Date: Thu, 12 Aug 2021 06:39:16 -0300
-Subject: [PATCH 1/5] rsync
+Subject: [PATCH 1/6] rsync
 
 ---
  pigz.c | 4 ++--
@@ -25,5 +25,5 @@ index f90157f..76e1ef2 100644
                                      // where 01 is name and 10 is time
      g.pipeout = 0;                  // don't force output to stdout
 -- 
-2.32.0
+2.34.0
 

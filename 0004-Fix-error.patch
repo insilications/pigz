@@ -1,7 +1,7 @@
 From 3453123f892e6f795ad28739f4d9c672e077e466 Mon Sep 17 00:00:00 2001
 From: Francisco Boni <boboniboni@gmail.com>
 Date: Thu, 12 Aug 2021 06:43:15 -0300
-Subject: [PATCH 4/5] Fix error
+Subject: [PATCH 4/6] Fix error
 
 ---
  pigz.c | 3 +++
@@ -22,5 +22,5 @@ index 76e1ef2..dfb2bb6 100644
                  // gzip -cdf acts like cat on uncompressed input
                  !((method == -1 || method == -2) && g.force && g.pipeout &&
 -- 
-2.32.0
+2.34.0
 

@@ -6,6 +6,7 @@ bzip2-dev
 bzip2-staticdev
 expat-dev
 expat-staticdev
+groff
 gzip
 libxml2-dev
 libxml2-staticdev

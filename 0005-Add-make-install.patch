@@ -1,7 +1,7 @@
 From 19400ee237d9493e276883580ac83c447e3b9f57 Mon Sep 17 00:00:00 2001
 From: Francisco Boni <boboniboni@gmail.com>
 Date: Thu, 12 Aug 2021 07:00:27 -0300
-Subject: [PATCH 5/5] Add make install
+Subject: [PATCH 5/6] Add make install
 
 ---
  Makefile | 7 +++++++
@@ -25,5 +25,5 @@ index c05b465..5fb8bec 100644
  clean:
  	@rm -f *.o pigz unpigz pigzj pigzn pigzt pigz.c.gz pigz.c.zz pigz.c.zip
 -- 
-2.32.0
+2.34.0
 

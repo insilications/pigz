@@ -3,3 +3,4 @@
 0003-Link-static-zlib.patch
 0004-Fix-error.patch
 0005-Add-make-install.patch
+0006-Fix-LIBS-and-LDFLAGS.patch
